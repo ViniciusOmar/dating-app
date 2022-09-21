@@ -25,6 +25,7 @@ namespace API
             });
 
             services.AddControllers();
+            services.AddCors();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv5", Version = "v1" });
@@ -44,6 +45,11 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
+            //Allow any header: such as Authentication
+            //Allow any method: Put request, get request, post request
+            //With Origin: Allow those things above only for the origins passed in the parameter
 
             app.UseAuthorization();
 
