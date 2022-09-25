@@ -3,6 +3,7 @@ using API.Data;
 using API.Extensions;
 using API.Interfaces;
 using API.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -25,6 +26,7 @@ namespace API
         {
             services.AddApplicationServiceExtensions(_configuration);
             services.AddControllers();
+            services.AddIdentityServiceExtensions(_configuration);
 
             services.AddCors();
             services.AddSwaggerGen(c =>
@@ -51,6 +53,8 @@ namespace API
             //Allow any header: such as Authentication
             //Allow any method: Put request, get request, post request
             //With Origin: Allow those things above only for the origins passed in the parameter
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
