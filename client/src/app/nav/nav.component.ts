@@ -10,7 +10,6 @@ import { AccountService } from '../_services/account.service';
 export class NavComponent implements OnInit
 {
     loginModel:any = {};
-    loggedIn: boolean = false;
 
     constructor(public accountService: AccountService) { }
 
@@ -24,12 +23,10 @@ export class NavComponent implements OnInit
         {
             next: response =>
             {
-                this.loggedIn = true;
                 console.log(response);
             },
             error: error =>
             {
-                this.loggedIn = false;
                 console.log("Error message: " + error.error);
                 console.log(error);
             }
@@ -38,7 +35,6 @@ export class NavComponent implements OnInit
 
     logout()
     {
-       this.loggedIn = false;
         this.accountService.logout();
     }
 }
